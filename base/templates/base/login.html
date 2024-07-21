@@ -1,0 +1,117 @@
+{% include 'base/navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body class = "text-bg-tertiary">
+    {% if page == 'login' %}
+    {% comment %} <div class="container">
+        <h1>Login</h1>
+        <form action="" method = "POST">
+            {% csrf_token %}
+            <input type="text" name = "username" placeholder = "enter Username here">
+            <input type="password" name = "password" placeholder = "Enter password">
+            <input type="submit" value = "login">
+            
+        </form>
+        <p>Haven't signed up yet</p>
+        <a href="{% url 'register' %}">Sign Up</a>
+    </div> {% endcomment %}
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+          <div class="col" style="margin-top: 50px">
+            <div class="card bg-warning" style="width: 18rem;">
+                <div class="card-body">
+                    <h2 class="card-title">Sign In</h2>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Enter Your Details to get to homepage!</h6>
+                    <form action="" method = "POST">
+                      {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Username</label>
+                      <input type="text" id = "username" name = "username" class="form-control"  required>
+                      <div id="userHelp" class="form-text">Enter Your Username!</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Password</label>
+                      <input type="password" class="form-control" name = "password" required>
+                    </div>
+                    <input type="submit" class = "btn btn-primary" value = "Sign In">
+                  </form>
+                  <span>Haven't made an account yet?</span>
+                  <a href="{% url 'register'%}">Register!</a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    {% else %}
+    <div class="container d-flex justify-content-center">
+        <div class="row">
+          <div class="col" style="margin-top: 50px" >
+            <div class="card bg-warning" style="width: 18rem;">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Register</h2>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Enter Your Details to register!</h6>
+                    <form action="{% url 'register' %}" method = "POST">
+                      {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Username</label>
+                      <input type="text" id = "username" name = "username" class="form-control"  required>
+                      <div id="userHelp" class="form-text">Think of a unique Username!</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name = "email" required>
+                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> 
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="pass1" name = "pass1" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                      <input type="password" class="form-control" id = "pass2" name = "pass2" required>
+                    </div>
+                    <input type="submit" class = "btn btn-primary" value = "Register">
+                  </form>
+                  <span class="text-center">Already registered?</span>
+                  <a href="{% url 'login'%}">Sign In!</a>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    {% comment %} <div class="container">
+        <h1>Register</h1>
+    <form action="{% url 'register' %}" method = "POST">
+        {% csrf_token %}
+            <label for=""><h5>Username: </h5></label>
+            <input type="text" id="username" name="username" placeholder="Create a User (Only letters and numbers)" required>
+            <br>
+            <label for=""><h5>Email: </h5></label>
+            <input type="email" id="email" name="email" placeholder="Type your email" required>
+            <br>
+            <label for=""><h5>Password: </h5></label>
+            <input type="password" id="pass1" name="pass1" placeholder="Type your password" required>
+            <br>
+            <label for=""><h5> Confirm Password: </h5></label>
+            <input type="password" id="pass2" name="pass2" placeholder="Confirm your password" required>
+            <br>
+            <input type="submit" value = "Register">
+    </form>
+    <p>Already signed up</p>
+    <a href="{% url 'login' %}">Sign In</a>
+    </div> {% endcomment %}
+    {% endif%}
+
+
+
+    
+
+      
+</body>
+</html>

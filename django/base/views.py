@@ -17,11 +17,12 @@ def loginPage(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "You are successfully logged in")
-                return render(request, "base/home.html")
+                return render(request, "base/home.html",{"username": username})
             else:
                 messages.error(request,"Password is wrong")
-        except:
+        except Exception as e:
             messages.error(request, "Username does not exist")
+            print(e)
 
         
 

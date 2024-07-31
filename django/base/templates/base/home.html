@@ -1,0 +1,438 @@
+{% include 'base/navbar.html' %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React</title>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/@babel/standalone@7.10.3/babel.min.js"
+      crossorigin
+    ></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/uuid@latest/dist/umd/uuid.min.js" crossorigin></script> -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <!-- <link rel="stylesheet" href="/App.css"> -->
+     <style>
+        
+.note_footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    margin-left: 4px;
+  }
+  
+  .note textarea {
+    white-space: pre-wrap;
+    background: transparent;
+    border: none;
+    color: #000000;
+    resize: none;
+    font-size: 18px;
+  }
+  
+  .note textarea:focus {
+    outline: none;
+  }
+  
+  .note textarea::placeholder {
+    color: #000000;
+    opacity: 0.4;
+  }
+  
+  
+  
+  .note_save:hover {
+    background: #fff;
+    border: 1.5px solid #fff;
+    color: #4b1589;
+  }
+  
+  
+  .main {
+    width: 100%;
+    margin: 0px auto;
+    padding: 0px 15px;
+    min-height: 100vh;
+  }
+  
+  .header {
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0px;
+    text-align: center;
+  }
+  
+  .title {
+    color: #000000;
+    font-size: 38px;
+    font-weight: 400;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  
+  .notes {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-gap: 1.5rem;
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+  }
+  .dark {
+    .form-check-input{
+      padding-top: 5px;
+      border: 2px solid white;
+    }
+    .note{
+      background-color: #000321;
+  }
+    .title{
+      color: aliceblue;
+      border: 2px solid white;
+      background-color: #000536;
+    }
+    .note_save {
+      background-color: rgb(51, 234, 0);
+      transition: 0.1s ease-in-out;
+      border: 1.5px solid #000ba2;
+      border-radius: 10px;
+      color: #000000;
+      padding: 4px 10px;
+      font-size: 13px;
+      cursor: pointer;
+  }
+  .note-body{
+    color: white;
+  }
+  .note_head{
+    color: whitesmoke;
+  }
+  hr{
+    color: white;
+  }
+    background-color: rgb(0, 0, 0);
+  }
+  
+  
+  
+  .light {
+    .note{
+      background-color: rgb(89, 203, 44);
+  }
+  .form-check-input{
+    padding-top: 5px;
+    border: 2px solid black;
+  }
+    .title{
+      color: rgb(0, 0, 0);
+      background-color: #6cff62;
+      border: 2px solid black;
+    }
+    .note_save {
+      background: transparent;
+      transition: 0.1s ease-in-out;
+      border: 1.5px solid #0d00ff;
+      border-radius: 10px;
+      background-color: yellow;
+      color: #000000;
+      padding: 4px 10px;
+      font-size: 13px;
+      cursor: pointer;
+  }
+  hr{
+    color: black;
+    height: 10px;
+  }
+    background-color: rgb(185, 254, 160);
+  }
+  @media screen and (max-width: 900px) {
+    .notes {
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+    }
+  }
+  
+  @media screen and (max-width: 500px) {
+    .notes {
+      grid-template-columns: repeat(1, minmax(300px, 1fr));
+    }
+  }
+  
+     </style>
+  </head>
+  <body>
+    {% comment %} <div class="dome">{{username}}</div> {% endcomment %}
+    <div class="root"></div>
+  </body>
+</html>
+<script type="text/babel">
+  console.log({ React });
+  console.log({ ReactDOM });
+  window.username = "{{username}}";
+    function uuid() {
+    return (
+        Math.random().toString(36).substring(2, 15) +
+        Math.random().toString(36).substring(2, 15)
+    );
+  }
+    function username(){
+        const a = window.username
+    return (
+        a
+    );
+    }
+
+  function Note({ id, head, text, editHandler, deleteHandler,username}) {
+    return (
+      <div className="note container card ">
+        <div className="note_head card-title ms-3 mt-3">{head}</div>
+        <hr />
+        <div className="note-body card-body">{text}</div>
+        <div className="note_footer" >
+            {window.username === username && (
+                <button
+                    className="note_save"
+                    onClick={function() {
+                        deleteHandler(id);
+                    }}
+                >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
+              <path d="M9 8h2v9H9zm4 0h2v9h-2z"></path>
+            </svg>
+          </button>)}
+          &nbsp;
+          {window.username === username && (
+          <button
+            className="note_save"
+            onClick={function () {
+                if (window.username === username){
+                    editHandler(id, text, head);
+                }
+                else{
+                    
+                }
+                
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+            >
+              <path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L13.4 6.41 3 16.82V21h4.18l10.46-10.46 2.77-2.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path>
+            </svg>
+          </button>)}
+        </div>
+      </div>
+    );
+  }
+  function CreateNote({
+    headText,
+    setHeadText,
+    inputText,
+    setInputText,
+    saveHandler,
+  }) {
+    const char = 1000;
+    const charLimit = char - inputText.length;
+
+    return (
+      <div className="note container card text-bg-primary create">
+        <div className="card-title ms-3 mt-3">
+          <textarea
+            cols={100}
+            rows={1}
+            placeholder="Title"
+            value={headText}
+            onChange={function (e) {
+              setHeadText(e.target.value);
+            }}
+            maxLength={100}
+          ></textarea>
+        </div>
+        <hr />
+        <textarea
+          className="card-body"
+          cols={10}
+          rows={5}
+          placeholder="Take a Note....."
+          value={inputText}
+          onChange={function (e) {
+            setInputText(e.target.value);
+          }}
+          maxLength={1000}
+        ></textarea>
+        <div className="note_footer">
+          <span className="label">{charLimit} Left</span>
+          <button className="note_save" onClick={saveHandler}>
+            Save
+          </button>
+        </div>
+      </div>
+    );
+  }
+  function Notes() {
+    const [inputText, setInputText] = React.useState("");
+    const [headText, setHeadText] = React.useState("");
+    const [notes, setNotes] = React.useState([]);
+    const [editToggle, setEditToggle] = React.useState(null);
+
+    const editHandler = function (id, text, head) {
+      setEditToggle(id);
+      setInputText(text);
+      setHeadText(head);
+    };
+
+    const saveHandler = function () {
+      if (editToggle) {
+        setNotes(
+          notes.map(function (note) {
+            return note.id === editToggle
+              ? { ...note, text: inputText, head: headText }
+              : note;
+          })
+        );
+      } else {
+        setNotes(function (prevNotes) {
+          return [
+            ...prevNotes,
+            {
+              id: uuid(),
+              username: window.username,
+              text: inputText,
+              head: headText,
+            },
+          ];
+        });
+      }
+
+      setInputText("");
+      setHeadText("");
+      setEditToggle(null);
+    };
+
+    const deleteHandler = function (id) {
+      const newNotes = notes.filter(function (n) {
+        return n.id !== id;
+      });
+      setNotes(newNotes);
+    };
+
+    React.useEffect(function () {
+      const data = JSON.parse(localStorage.getItem("Notes"));
+      if (data) {
+        setNotes(data);
+      }
+    }, []);
+
+    React.useEffect(
+      function () {
+        localStorage.setItem("Notes", JSON.stringify(notes));
+      },
+      [notes]
+    );
+
+    return (
+      <div className="notes container">
+        {notes.map(function (note) {
+          return editToggle === note.id ? (
+            <CreateNote
+              inputText={inputText}
+              setInputText={setInputText}
+              headText={headText}
+              setHeadText={setHeadText}
+              saveHandler={saveHandler}
+            />
+          ) : (
+            <Note
+              key={note.id}
+              id={note.id}
+              username = {note.username}
+              text={note.text}
+              head={note.head}
+              editHandler={editHandler}
+              deleteHandler={deleteHandler}
+            />
+          );
+        })}
+        {editToggle === null ? (
+          <CreateNote
+            inputText={inputText}
+            setInputText={setInputText}
+            headText={headText}
+            setHeadText={setHeadText}
+            saveHandler={saveHandler}
+          />
+        ) : null}
+      </div>
+    );
+  }
+  function Header() {
+    return (
+      <div className="header">
+        <h1 className="title">Tweets</h1>
+      </div>
+    );
+  }
+  function App() {
+    const [theme, setTheme] = React.useState("light");
+
+    function changeTheme() {
+      setTheme(theme === "light" ? "dark" : "light");
+    }
+
+    return (
+      <div className={"main " + theme}>
+        <a href="#" className="form-check form-switch" onClick={changeTheme}>
+          {theme === "light" ? (
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+            ></input>
+          ) : (
+            <input
+              className="form-check-input"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckChecked"
+              checked
+            ></input>
+          )}
+        </a>
+
+        <Header />
+        <Notes />
+      </div>
+    );
+  }
+
+  const root = ReactDOM.createRoot(document.querySelector(".root"));
+  root.render(<App />);
+</script>
